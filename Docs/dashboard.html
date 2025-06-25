@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 AI Crypto Trading Bot - Bitcoin & USDT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="crypto-loader">
+            <div class="bitcoin-icon">₿</div>
+            <div class="loading-text">Initializing AI Trading Bot...</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Hero Header -->
+        <header class="hero-header">
+            <div class="crypto-title">
+                <i class="fab fa-bitcoin crypto-icon"></i>
+                <h1 class="brand-name">AI CRYPTO BOT</h1>
+                <div class="subtitle">Bitcoin & USDT Smart Trading Assistant</div>
+            </div>
+            
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-label">Connection:</span>
+                    <span id="connection-status" class="status-value connected">🟢 Connected</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Runtime:</span>
+                    <span id="uptime" class="status-value">00:00:00</span>
+                </div>
+            </div>
+            
+            <div class="control-buttons">
+                <button id="start-bot" class="neon-btn start-btn">
+                    <i class="fas fa-rocket"></i>
+                    <span>START TRADING</span>
+                </button>
+                <button id="stop-bot" class="neon-btn stop-btn" disabled>
+                    <i class="fas fa-stop"></i>
+                    <span>STOP BOT</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Trading Dashboard -->
+        <div class="dashboard-grid">
+            <!-- Main Trading Panel -->
+            <div class="trading-panel">
+                <div class="panel-header">
+                    <h2>🎯 SMART TRADING SIGNALS</h2>
+                    <div class="signal-indicator" id="signalIndicator">
+                        <div class="pulse-dot"></div>
+                        <span>Analyzing Market...</span>
+                    </div>
+                </div>
+                
+                <div class="crypto-cards" id="cryptoCards">
+                    <!-- Bitcoin Card -->
+                    <div class="crypto-card bitcoin-card">
+                        <div class="crypto-header">
+                            <div class="crypto-info">
+                                <i class="fab fa-bitcoin"></i>
+                                <span class="crypto-name">BITCOIN</span>
+                                <span class="crypto-symbol">BTC/USDT</span>
+                            </div>
+                            <div class="price-display" id="btc-price">$0.00</div>
+                        </div>
+                        
+                        <div class="signal-section">
+                            <div class="risk-meter">
+                                <div class="risk-label">RISK LEVEL</div>
+                                <div class="risk-value" id="btc-risk">ANALYZING</div>
+                            </div>
+                            
+                            <div class="confidence-meter">
+                                <div class="confidence-label">AI CONFIDENCE</div>
+                                <div class="confidence-value" id="btc-confidence">---%</div>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" id="btc-confidence-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-box" id="btc-recommendation">
+                            <div class="recommendation-text">Collecting market data...</div>
+                            <div class="recommendation-action"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- USDT Pairs Card -->
+                    <div class="crypto-card usdt-card">
+                        <div class="crypto-header">
+                            <div class="crypto-info">
+                                <i class="fas fa-coins"></i>
+                                <span class="crypto-name">ALTCOINS</span>
+                                <span class="crypto-symbol">Various/USDT</span>
+                            </div>
+                            <div class="price-display" id="alt-price">Multiple Pairs</div>
+                        </div>
+                        
+                        <div class="signal-section">
+                            <div class="risk-meter">
+                                <div class="risk-label">RISK LEVEL</div>
+                                <div class="risk-value" id="alt-risk">ANALYZING</div>
+                            </div>
+                            
+                            <div class="confidence-meter">
+                                <div class="confidence-label">AI CONFIDENCE</div>
+                                <div class="confidence-value" id="alt-confidence">---%</div>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" id="alt-confidence-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-box" id="alt-recommendation">
+                            <div class="recommendation-text">Scanning opportunities...</div>
+                            <div class="recommendation-action"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Panel -->
+            <div class="side-panel">
+                <!-- Quick Stats -->
+                <div class="stats-box">
+                    <h3>📊 QUICK STATS</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Market Status:</span>
+                        <span class="stat-value" id="market-status">🟢 ACTIVE</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Signals Today:</span>
+                        <span class="stat-value" id="signals-today">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Success Rate:</span>
+                        <span class="stat-value" id="success-rate">---%</span>
+                    </div>
+                </div>
+
+                <!-- Activity Log -->
+                <div class="activity-log">
+                    <h3>📝 LIVE ACTIVITY</h3>
+                    <div class="log-container" id="activity-log">
+                        <div class="log-entry">Bot initialized - Ready to trade</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Trades Section -->
+        <div class="trades-section" id="trades-section" style="display: none;">
+            <h2>💰 ACTIVE TRADES</h2>
+            <div class="trades-grid" id="trades-grid">
+                <!-- Active trades will be populated here -->
+            </div>
+        </div>
+
+        <!-- Beginner Guide -->
+        <div class="guide-section">
+            <div class="guide-box">
+                <h3>🎓 HOW TO USE THIS BOT</h3>
+                <div class="guide-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Click "START TRADING" to begin market analysis</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Watch the RISK LEVEL: GREEN = Safe, RED = Dangerous</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">AI CONFIDENCE shows how sure we are (higher = better)</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-text">Follow the recommendation: BUY, SELL, or WAIT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+    <script>
+        // Hide loading overlay after page loads
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
