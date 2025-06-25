@@ -1,1 +1,4 @@
-request
+Flask==2.3.2
+Flask-SocketIO==5.3.4
+requests==2.31.0
+eventlet==0.33.3
