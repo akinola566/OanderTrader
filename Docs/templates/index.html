@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🚀 AI Crypto Trading Bot - Bitcoin & USDT</title>
+    <meta name="description" content="AI-powered crypto bot for Bitcoin and USDT trading. Get smart trading signals, risk analysis, and live updates.">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -191,10 +197,10 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
-    <link rel="stylesheet" href="static/style.css">
-<script src="static/script.js"></script>
-    
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+
     <script>
         // Hide loading overlay after page loads
         window.addEventListener('load', function() {
@@ -204,4 +210,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
