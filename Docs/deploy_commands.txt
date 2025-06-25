@@ -1,0 +1,24 @@
+// Commands to push your crypto bot to GitHub
+
+// 1. Navigate to docs folder
+cd docs/
+
+// 2. Check current status
+git status
+
+// 3. Configure git (replace with your details)
+git config user.name "kennyfavour11"
+git config user.email "your-email@example.com"
+
+// 4. Push to your repository
+git push -u origin main
+
+// 5. If authentication needed, use personal access token as password
+// Username: kennyfavour11
+// Password: [your-personal-access-token]
+
+// Alternative: Force push if needed
+git push -f origin main
+
+// Your repository: https://github.com/kennyfavour11/OandaTrader
+// After push, deploy to Heroku for public access
